@@ -94,8 +94,10 @@ public class Quadrilateral {
 	 */
 	public double getPerimeter() {
 		// YOUR CODE HERE
-		return 0; // Dummy return
+		return this.getP1().distance(getP2()) + this.getP2().distance(getP3())
+				+ this.getP3().distance(getP4()) + this.getP4().distance(getP1()); // Dummy return
 	}
+	//does this work???
 	
 	/**
 	 * Exercise #4
