@@ -92,8 +92,8 @@ public class Product {
     *  Hint: See the constants provided for tax rates.
     */
    public double getTotalCostWithTax(){
-        this.purchasePrice = (this.sellingPrice  *  (TAX_RATE_CITY + TAX_RATE_STATE)) + this.sellingPrice;
-		return this.purchasePrice; // Dummy return
+        
+		return (this.sellingPrice  *  (TAX_RATE_CITY + TAX_RATE_STATE)) + this.sellingPrice; // Dummy return
     }
 
   
@@ -106,7 +106,7 @@ public class Product {
      *  
      */
     public void setPriceBeforeTax(double totalWithTax){
-        this.sellingPrice = totalWithTax - (TAX_RATE_CITY + TAX_RATE_STATE);
+        this.sellingPrice = (totalWithTax/1.115);
     }
 
 
@@ -120,7 +120,8 @@ public class Product {
      */
     public double getNetProfit(){
 		// YOUR CODE HERE
-		return 0; // Dummy return
+    	this.sellingPrice -= this.purchasePrice - AD_FEES_PERCENTAGE;
+		return sellingPrice; // Dummy return
     }
     
     
@@ -132,7 +133,7 @@ public class Product {
      *  
      */
     public void subtractInventory(int quantity) {
-    	// YOUR CODE HERE
+    	if(this.inventoryQuantity < quantity) this.inventoryQuantity = 0;
     }    
  
     

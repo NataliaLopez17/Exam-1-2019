@@ -56,10 +56,10 @@ public class Quadrilateral {
 	 * with the upper left corner point in the Rectangle.
 	 */
 	public Quadrilateral(Rectangle r) {
-		this.p1 = new Point2D.Double(r.getMinX(), r.getMinY() + r.height);
-		this.p2 = new Point2D.Double(r.getLocation().getX(), r.getMaxY());
+		this.p1 = new Point2D.Double(r.getLocation().getX(), r.getLocation().getY());
+		this.p2 = new Point2D.Double(r.getLocation().getX() + r.getWidth(), r.getMaxY() - r.getHeight());
 		this.p3 = new Point2D.Double(r.getMaxX(), r.getMaxY());
-		this.p4 = new Point2D.Double(r.getLocation().getX(), r.getLocation().getX() + r.getHeight());
+		this.p4 = new Point2D.Double(r.getMinX(), r.getMinY()+ r.getHeight());
 	}
 
 	// Getters
@@ -69,7 +69,7 @@ public class Quadrilateral {
 	public Point2D.Double getP4() { return p4; }
 
 	// Instance Methods
-	
+	 
 	public String toString() {
 		return "<" + this.getP1() + this.getP2() + this.getP3() + this.getP4() + " >";
 	}
@@ -95,9 +95,8 @@ public class Quadrilateral {
 	public double getPerimeter() {
 		// YOUR CODE HERE
 		return this.getP1().distance(getP2()) + this.getP2().distance(getP3())
-				+ this.getP3().distance(getP4()) + this.getP4().distance(getP1()); // Dummy return
+				+ this.getP3().distance(getP4()) + this.getP4().distance(getP1()); 
 	}
-	//does this work???
 	
 	/**
 	 * Exercise #4
@@ -107,7 +106,9 @@ public class Quadrilateral {
 	 * 
 	 */
 	public Quadrilateral move(double deltaX, double deltaY) {
-		// YOUR CODE HERE
+		this.p1 = new Point2D.Double(p1.getX() + deltaX, p1.getY() + deltaY);
+		
+		this.p2 = new Point2D.Double(p1.getX(), p1.getY() + deltaY);
 		return this; // Leave this return as is since method should return target object
 	}
 	
@@ -128,8 +129,9 @@ public class Quadrilateral {
 	 * triangles by adding a segment from opposite points.
 	 */
 	public double getArea() {
-		// YOUR CODE HERE
-		return 0; // Dummy return
+		double t1 = Quadrilateral.triangleArea(p1.distance(getP3()), p3.distance(getP4()), p4.distance(getP1()));
+		double t2 = Quadrilateral.triangleArea(p1.distance(getP2()), p2.distance(getP3()), p3.distance(getP1()));
+		return t1 + t2; // Dummy return
 	}	
 	
 }
